@@ -1,4 +1,4 @@
-const $div = document.querySelector("div")
+const main = document.querySelector("main")
 const $form = document.querySelector("form")
 
 let inventory = [{
@@ -46,11 +46,10 @@ addEventListener("submit", (event) => {
         category: "none"
     }
     parseCategory(item)
+    showItems(inventory)
 
     inventory = [...inventory, item]
     console.log(inventory)
-
-
 })
 
 
@@ -64,11 +63,29 @@ function parseCategory(item) {
         item.category = "Sulfuras"
     } else if (item.name.includes("Backstage passes")) {
         item.category = "Backstage passes"
-    } else if (item.name.includes("Counjured")) {
+    } else if (item.name.includes("Conjured")) {
         item.category = "Conjured"
     }
     return item
 }
+
+function showItems(inventory) {
+    inventory.map(item => {
+        const $itemList = document.createElement("div")
+        $itemList.innerHTML = ``
+        $itemList.classList.add("list")
+        $itemList.innerHTML = ` 
+            <p>${item.name}</p>
+            <p>${item.sell_in}</p>
+            <p>${item.quality}</p>
+            `
+        return $itemList
+    }).forEach(($itemList) => {
+        main.append($itemList)
+    })
+}
+
+
 
 
 function addItem() {
