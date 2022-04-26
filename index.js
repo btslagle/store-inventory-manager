@@ -36,40 +36,45 @@ let inventory = [{
 
 
 
-addEventListener("submit", event => {
-            event.preventDefault()
-            const formData = new FormData(event.target)
-            const newItem = {
-                name: formData.get("item"),
-                sell_in: formData.get("sell_in"),
-                quality: formData.get("quality")
-            }
-            let inventory = [...inventory, newItem]
-            return items
-        }
+addEventListener("submit", (event) => {
+    event.preventDefault()
+    const formData = new FormData(event.target)
+    const item = {
+        name: formData.get("item"),
+        sell_in: formData.get("sell_in"),
+        quality: formData.get("quality"),
+        category: "none"
+    }
+    parseCategory(item)
+
+    inventory = [...inventory, item]
+    console.log(inventory)
+
+
+})
 
 
 
 
 
-        function parseCategory(item) {
-            if (item.name.includes("Aged Brie")) {
-                item.category = "Aged Brie"
-            } else if (item.name.includes("Sulfuras")) {
-                item.category = "Sulfuras"
-            } else if (item.name.includes("Backstage passes")) {
-                item.category = "Backstage passes"
-            } else if (item.name.includes("Counjured")) {
-                item.category = "Conjured"
-            }
-            return item
-        }
+function parseCategory(item) {
+    if (item.name.includes("Aged Brie")) {
+        item.category = "Aged Brie"
+    } else if (item.name.includes("Sulfuras")) {
+        item.category = "Sulfuras"
+    } else if (item.name.includes("Backstage passes")) {
+        item.category = "Backstage passes"
+    } else if (item.name.includes("Counjured")) {
+        item.category = "Conjured"
+    }
+    return item
+}
 
 
-        function addItem(item) {
+function addItem() {
 
-        }
+}
 
-        function updateSellIn() {}
+function updateSellIn() {}
 
-        function updateQuality() {}
+function updateQuality() {}
