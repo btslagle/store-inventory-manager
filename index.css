@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    background-color: black;
+    background-color: grey;
     color: white;
 }
 
@@ -36,4 +36,27 @@ form {
     align-self: center;
     align-content: center;
     justify-content: center;
+    margin-bottom: 34px;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: 500px 120px 120px;
+    margin: 8px;
+    line-height: 12px;
+    justify-content: center;
+}
+
+p {
+    margin: 8px;
+    font-size: 20px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 35px;
+    text-decoration: underline;
+    border-radius: 0%;
+    border-style: solid, 10px, white;
+    margin-bottom: 50px;
 }

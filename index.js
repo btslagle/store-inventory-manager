@@ -34,7 +34,7 @@ let inventory = [{
 
 }]
 
-
+showItems(inventory)
 
 addEventListener("submit", (event) => {
     event.preventDefault()
@@ -47,13 +47,9 @@ addEventListener("submit", (event) => {
     }
     parseCategory(item)
     showItems(inventory)
-
     inventory = [...inventory, item]
     console.log(inventory)
 })
-
-
-
 
 
 function parseCategory(item) {
@@ -65,33 +61,36 @@ function parseCategory(item) {
         item.category = "Backstage passes"
     } else if (item.name.includes("Conjured")) {
         item.category = "Conjured"
+    } else {
+        item.category = "none"
     }
     return item
 }
 
 function showItems(inventory) {
+    main.innerHTML = `""`
     inventory.map(item => {
         const $itemList = document.createElement("div")
-        $itemList.innerHTML = ``
         $itemList.classList.add("list")
         $itemList.innerHTML = ` 
             <p>${item.name}</p>
             <p>${item.sell_in}</p>
             <p>${item.quality}</p>
             `
+
         return $itemList
     }).forEach(($itemList) => {
         main.append($itemList)
+
     })
 }
 
 
 
+/*function update() {
+    const sell_in = item.sell_in
+    if (item.category === "Aged Brie") {
+        item.quality +
+    }
 
-function addItem() {
-
-}
-
-function updateSellIn() {}
-
-function updateQuality() {}
+}*/
