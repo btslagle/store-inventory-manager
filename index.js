@@ -50,7 +50,7 @@ addEventListener("submit", (event) => {
     checkQuality(item)
     updateSellIn(item)
     inventory = [...inventory, item]
-    return item
+    return inventory
 
 })
 
@@ -69,32 +69,27 @@ function parseCategory(item) {
     return item
 }
 
-button.addEventListener("click", event => {
 
-    updateSellIn(item)
-    checkQuality(item)
-    return item
-
-})
 
 function degradeQuality(item) {
-    console.log(item)
     if (item.category === "Sulfuras") {
         return item.quality = 80
     } else if (item.category === "Conjured") {
-        return item.quality = item.quality - 2
+        return item.quality -= 2
     } else if (item.category === "Backstage passes" && item.sell_in > 10) {
-        return item.quality = item.quality + 1
+        return item.quality += 1
     } else if (item.category === "Backstage passes" && item.sell_in <= 10) {
-        return item.quality = item.quality + 2
+        return item.quality += 2
     } else if (item.category === "Backstage passes" && item.sell_in <= 5) {
-        return item.quality = item.quality + 3
+        return item.quality += 3
     } else if (item.category === "Backstage passes" && item.sell_in <= 0) {
         return item.quality = 0
     } else if (item.sell_in <= 0) {
-        return item.quality = item.quality - 2
+        return item.quality -= 2
+    } else if (item.category === "Aged Brie") {
+        return item.quality += 1
     } else {
-        return item.quality = 0
+        return item.quality -= 1
     }
 
 }
@@ -120,6 +115,19 @@ function checkQuality(item) {
     }
 
 }
+
+
+button.addEventListener("click", event => {
+    event.preventDefault()
+    inventory.forEach(item => {
+        degradeQuality(item)
+        updateSellIn(item)
+        checkQuality(item)
+    })
+
+    return inventory
+
+})
 
 function showItems(item) {
     main.innerHTML = `""`
