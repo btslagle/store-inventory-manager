@@ -33,8 +33,8 @@ let inventory = [{
     category: "Conjured"
 
 }]
-
 showItems(inventory)
+
 
 addEventListener("submit", (event) => {
     event.preventDefault()
@@ -46,11 +46,12 @@ addEventListener("submit", (event) => {
         category: "none"
     }
     parseCategory(item)
-    showItems(inventory)
+    showItems(item)
+    checkQuality(item)
     inventory = [...inventory, item]
-    console.log(inventory)
-})
+    return item
 
+})
 
 function parseCategory(item) {
     if (item.name.includes("Aged Brie")) {
@@ -67,7 +68,58 @@ function parseCategory(item) {
     return item
 }
 
-function showItems(inventory) {
+function degradeQuality(item) {
+    if (item.category === "Sulfuras") {
+        return item.quality = 80
+    } else if (item.category === "Conjured") {
+        return item.quality = item.quality - 2
+    } else if (item.category === "Backstage passes" && item.sell_in > 10) {
+        return item.quality = item.quality + 1
+    } else if (item.category === "Backstage passes" && item.sell_in <= 10) {
+        return item.quality = item.quality + 2
+    } else if (item.category === "Backstage passes" && item.sell_in <= 5) {
+        return item.quality = item.quality + 3
+    } else if (item.category === "Backstage passes" && item.sell_in <= 0) {
+        return item.quality = 0
+    } else {
+        return item.quality = 0
+    }
+}
+
+function updateSellIn(item) {
+    if (item.category === "Sulfuras") {
+        return item.sell_in = 0
+    } else if (item.category === "Conjured") {
+        return item.sell_in = item.sell_in - 1
+    } else if (item.category === "Backstage passes" && item.sell_in > 10) {
+        return item.sell_in = item.sell_in + 1
+    } else if (item.category === "Backstage passes" && item.sell_in <= 10) {
+        return item.sell_in = item.sell_in + 2
+    } else if (item.category === "Backstage passes" && item.sell_in <= 5) {
+        return item.sell_in = item.sell_in + 3
+    } else if (item.category === "Backstage passes" && item.sell_in <= 0) {
+        return item.sell_in = 0
+    } else {
+        return item.sell_in = 0
+    }
+}
+
+function checkQuality(item) {
+    console.log(item.sell_in)
+    if (item.category === "Sulfuras") {
+        return item.quality = 80
+    } else if (item.category === "Sulfuras") {
+        return item.sell_in = 0
+    } else if (item.quality > 50) {
+        return item.quality = 50
+    } else if (item.quality < 0) {
+        return item.quality = 0
+    } else {
+        return item.quality
+    }
+}
+
+function showItems(item) {
     main.innerHTML = `""`
     inventory.map(item => {
         const $itemList = document.createElement("div")
@@ -77,20 +129,9 @@ function showItems(inventory) {
             <p>${item.sell_in}</p>
             <p>${item.quality}</p>
             `
-
         return $itemList
     }).forEach(($itemList) => {
         main.append($itemList)
 
     })
 }
-
-
-
-/*function update() {
-    const sell_in = item.sell_in
-    if (item.category === "Aged Brie") {
-        item.quality +
-    }
-
-}*/

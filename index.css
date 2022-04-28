@@ -5,6 +5,10 @@
     color: white;
 }
 
+body {
+    padding-bottom: 300px;
+}
+
 h1 {
     padding: 50px;
     margin-bottom: 35px;
@@ -27,6 +31,7 @@ header {
     align-self: center;
     align-content: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 form {
@@ -36,7 +41,16 @@ form {
     align-self: center;
     align-content: center;
     justify-content: center;
-    margin-bottom: 34px;
+    margin-bottom: 24px;
+}
+
+.submit {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    align-self: center;
+    margin-bottom: 0px;
+    margin-left: 30px;
 }
 
 .list {
