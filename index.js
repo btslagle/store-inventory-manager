@@ -1,6 +1,6 @@
 const main = document.querySelector("main")
 const $form = document.querySelector("form")
-
+const button = document.querySelector("button")
 let inventory = [{
     name: "+5 Dexerity Vest",
     sell_in: 10,
@@ -48,6 +48,7 @@ addEventListener("submit", (event) => {
     parseCategory(item)
     showItems(item)
     checkQuality(item)
+    updateSellIn(item)
     inventory = [...inventory, item]
     return item
 
@@ -68,7 +69,16 @@ function parseCategory(item) {
     return item
 }
 
+button.addEventListener("click", event => {
+
+    updateSellIn(item)
+    checkQuality(item)
+    return item
+
+})
+
 function degradeQuality(item) {
+    console.log(item)
     if (item.category === "Sulfuras") {
         return item.quality = 80
     } else if (item.category === "Conjured") {
@@ -81,35 +91,26 @@ function degradeQuality(item) {
         return item.quality = item.quality + 3
     } else if (item.category === "Backstage passes" && item.sell_in <= 0) {
         return item.quality = 0
+    } else if (item.sell_in <= 0) {
+        return item.quality = item.quality - 2
     } else {
         return item.quality = 0
     }
+
 }
 
 function updateSellIn(item) {
     if (item.category === "Sulfuras") {
         return item.sell_in = 0
-    } else if (item.category === "Conjured") {
+    } else if (item.sell_in > 0) {
         return item.sell_in = item.sell_in - 1
-    } else if (item.category === "Backstage passes" && item.sell_in > 10) {
-        return item.sell_in = item.sell_in + 1
-    } else if (item.category === "Backstage passes" && item.sell_in <= 10) {
-        return item.sell_in = item.sell_in + 2
-    } else if (item.category === "Backstage passes" && item.sell_in <= 5) {
-        return item.sell_in = item.sell_in + 3
-    } else if (item.category === "Backstage passes" && item.sell_in <= 0) {
-        return item.sell_in = 0
-    } else {
-        return item.sell_in = 0
     }
+
 }
 
 function checkQuality(item) {
-    console.log(item.sell_in)
     if (item.category === "Sulfuras") {
         return item.quality = 80
-    } else if (item.category === "Sulfuras") {
-        return item.sell_in = 0
     } else if (item.quality > 50) {
         return item.quality = 50
     } else if (item.quality < 0) {
@@ -117,6 +118,7 @@ function checkQuality(item) {
     } else {
         return item.quality
     }
+
 }
 
 function showItems(item) {

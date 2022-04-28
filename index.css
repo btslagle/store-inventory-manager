@@ -41,10 +41,9 @@ form {
     align-self: center;
     align-content: center;
     justify-content: center;
-    margin-bottom: 24px;
 }
 
-.submit {
+.button {
     display: flex;
     flex-direction: column;
     width: 100px;
