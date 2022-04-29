@@ -31,10 +31,8 @@ let inventory = [{
     sell_in: 3,
     quality: 6,
     category: "Conjured"
-
 }]
 showItems(inventory)
-
 
 addEventListener("submit", (event) => {
     event.preventDefault()
@@ -49,7 +47,6 @@ addEventListener("submit", (event) => {
     parseCategory(item)
     checkQuality(item)
     showItems(item)
-    console.log(inventory)
     return inventory
 })
 
@@ -61,12 +58,8 @@ button.addEventListener("click", event => {
         updateSellIn(item)
         showItems(item)
     })
-    console.log(inventory)
     return inventory
-
 })
-
-
 
 function parseCategory(item) {
     if (item.name.includes("Aged Brie")) {
@@ -133,8 +126,6 @@ function updateSellIn(item) {
     } else {
         return item.sell_in = 0
     }
-
-
 }
 
 function checkQuality(item) {
