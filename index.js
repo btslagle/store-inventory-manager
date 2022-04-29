@@ -76,18 +76,18 @@ function degradeQuality(item) {
         return item.quality = 80
     } else if (item.category === "Conjured") {
         return item.quality -= 2
-    } else if (item.category === "Backstage passes" && item.sell_in > 10) {
-        return item.quality += 1
-    } else if (item.category === "Backstage passes" && item.sell_in <= 10) {
-        return item.quality += 2
-    } else if (item.category === "Backstage passes" && item.sell_in <= 5) {
-        return item.quality += 3
-    } else if (item.category === "Backstage passes" && item.sell_in <= 0) {
+    } else if (item.category === "Backstage pass" && item.sell_in === 0) {
         return item.quality = 0
+    } else if (item.category === "Backstage pass" && item.sell_in > 10) {
+        return item.quality = item.quality + 1
+    } else if (item.category === "Backstage pass" && item.sell_in <= 10 && item.sell_in > 5) {
+        return item.quality = item.quality + 2
+    } else if (item.category === "Backstage pass" && item.sell_in <= 5) {
+        return item.quality = item.quality + 3
+    } else if (item.category === "Aged Brie") {
+        return item.quality = item.quality + 1
     } else if (item.sell_in <= 0) {
         return item.quality -= 2
-    } else if (item.category === "Aged Brie") {
-        return item.quality += 1
     } else {
         return item.quality -= 1
     }
@@ -99,19 +99,25 @@ function updateSellIn(item) {
         return item.sell_in = 0
     } else if (item.sell_in > 0) {
         return item.sell_in = item.sell_in - 1
+    } else {
+        return item.sell_in = 0
     }
+
 
 }
 
 function checkQuality(item) {
     if (item.category === "Sulfuras") {
         return item.quality = 80
+    } else if (item.category === "Aged Brie") {
+        return item.quality
     } else if (item.quality > 50) {
         return item.quality = 50
-    } else if (item.quality < 0) {
+    } else if (item.quality <= 0) {
         return item.quality = 0
     } else {
         return item.quality
+
     }
 
 }
@@ -123,8 +129,9 @@ button.addEventListener("click", event => {
         degradeQuality(item)
         updateSellIn(item)
         checkQuality(item)
-    })
 
+    })
+    console.log(inventory)
     return inventory
 
 })
