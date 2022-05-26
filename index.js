@@ -47,7 +47,6 @@ addEventListener("submit", (event) => {
     parseCategory(item)
     checkQuality(item)
     showItems(item)
-    return inventory
 })
 
 button.addEventListener("click", event => {
@@ -58,7 +57,6 @@ button.addEventListener("click", event => {
         updateSellIn(item)
         showItems(item)
     })
-    return inventory
 })
 
 function parseCategory(item) {
